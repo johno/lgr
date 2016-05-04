@@ -2,6 +2,7 @@
 
 var split = require('split')
 var through = require('through')
+var isPresent = require('is-present')
 var PassThrough = require('stream').PassThrough
 var logfmt = require('logfmt')
 
@@ -10,7 +11,7 @@ module.exports = function lgr (options) {
   var streamParser = new PassThrough()
 
   var handleStream = through(function (line) {
-    if (line !== '') {
+    if (isPresent(line)) {
       if (isHerokuRouterLog(line)) {
         this.queue(parseHerokuRouterLog(line))
       }
@@ -24,9 +25,6 @@ module.exports = function lgr (options) {
   streamParser.pipe = function (dest, options) {
     return this.transformStream.pipe(dest, options)
   }
-
-//  return logStream.pipe(logfmt.streamParser())
-//
 
   return streamParser
 }

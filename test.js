@@ -15,7 +15,6 @@ test('lgr does something awesome', t => {
   s.push(null)
 
   s.pipe(lgr()).pipe(through(data => {
-    console.log(data)
     t.is(data.method, 'POST')
   }))
 })
