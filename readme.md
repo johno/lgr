@@ -1,6 +1,8 @@
 # lgr [![Build Status](https://secure.travis-ci.org/johnotander/lgr.png?branch=master)](https://travis-ci.org/johnotander/lgr) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Turn logs into data
+__Work in progress__
+
+Turn a stream of logs into data.
 
 ## Installation
 
@@ -11,9 +13,11 @@ npm install --save lgr
 ## Usage
 
 ```javascript
-var lgr = require('lgr')
+const lgr = require('lgr')
 
-lgr()  // => true
+myLogStream.pipe(lgr()).pipe(through(data => {
+  // { ... }
+}))
 ```
 
 ## License
